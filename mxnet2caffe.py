@@ -4,15 +4,16 @@ import mxnet as mx
 import caffe
 
 parser = argparse.ArgumentParser(description='Convert MXNet model to Caffe model')
-parser.add_argument('--mx-model',    type=str, default='model_mxnet/face/facega2')
+parser.add_argument('--mx-model',    type=str, default='model_mxnet/arcface-model-128')
 parser.add_argument('--mx-epoch',    type=int, default=0)
-parser.add_argument('--cf-prototxt', type=str, default='model_caffe/face/facega2.prototxt')
-parser.add_argument('--cf-model',    type=str, default='model_caffe/face/facega2.caffemodel')
+parser.add_argument('--cf-prototxt', type=str, default='model_caffe/face_arcface_128_deploy.prototxt')
+parser.add_argument('--cf-model',    type=str, default='model_caffe/face_arcface_128_model.caffemodel')
 args = parser.parse_args()
 
 # ------------------------------------------
 # Load
 _, arg_params, aux_params = mx.model.load_checkpoint(args.mx_model, args.mx_epoch)
+caffe.set_mode_cpu()
 net = caffe.Net(args.cf_prototxt, caffe.TRAIN)   
 
 # ------------------------------------------
