@@ -3,6 +3,11 @@
 You are welcome to file issues either for bugs in the source code, feature requests!
 
 
+## Covert insightface mxnet model to caffe model
+1. run `json2prototxt.py` to generate caffe `.prototxt` file.
+2. The bottom names of `conv0` and `pre_fc1` should be change to `data` and `bn1`, because some layers are removed. Refer to [here](https://github.com/deepinsight/insightface/issues/67) for more details.
+3. run `mxnet2caffe.py` to generate caffe weights.
+
 ## Brief Guide
 
 Given a MXNet Model, MXNet2Caffe can automatically generate both `.prototxt` and `.caffemodel`.
